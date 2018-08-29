@@ -23,11 +23,15 @@ namespace KanbanGame.DomainModel
         public bool Equals(Entity<T> obj)
         {
             if (obj == null || GetType() != obj.GetType())
+            {
                 return false;
+            }
 
             if (base.Equals(obj))
+            {
                 return true;
-
+            }
+                
             return Id.Equals(obj.Id);
         }
     }
