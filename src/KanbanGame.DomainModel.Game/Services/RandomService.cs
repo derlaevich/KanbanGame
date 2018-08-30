@@ -2,7 +2,7 @@
 using System;
 using System.Runtime.CompilerServices;
 
-[assembly:InternalsVisibleToAttribute("KanbanGame.DomainModel.Game.Tests")]
+[assembly:InternalsVisibleTo("KanbanGame.DomainModel.Game.Tests")]
 namespace KanbanGame.DomainModel.Game.Services
 {
     internal class RandomService : IRandomService
