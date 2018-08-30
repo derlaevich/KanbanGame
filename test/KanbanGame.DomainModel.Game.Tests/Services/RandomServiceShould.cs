@@ -2,7 +2,7 @@ using KanbanGame.DomainModel.Game.Services;
 using System.Collections.Generic;
 using Xunit;
 
-namespace KanbanGame.DomainModel.Game.Tests
+namespace KanbanGame.DomainModel.Game.Tests.Services
 {
     public class RandomServiceShould
     {

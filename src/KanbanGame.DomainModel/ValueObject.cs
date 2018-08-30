@@ -1,40 +1,56 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace KanbanGame.DomainModel
 {
-    public abstract class ValueObject<T> where T : ValueObject<T>
+    public abstract class ValueObject
     {
-        protected abstract IEnumerable<object> GetAttributesToIncludeInEqualityCheck();
-
-        public override bool Equals(object obj) => base.Equals(obj as T);
-
-        public bool Equals(T obj)
+        protected static bool EqualOperator(ValueObject left, ValueObject right)
         {
-            if (obj == null)
+            if (ReferenceEquals(left, null) ^ ReferenceEquals(right, null))
             {
                 return false;
             }
 
-            return GetAttributesToIncludeInEqualityCheck()
-                .SequenceEqual(obj.GetAttributesToIncludeInEqualityCheck());
+            return ReferenceEquals(left, null) || left.Equals(right);
         }
 
-        public static bool operator ==(ValueObject<T> left, ValueObject<T> right) => Equals(left, right);
+        protected static bool NotEqualOperator(ValueObject left, ValueObject right)
+        {
+            return !EqualOperator(left, right);
+        }
 
-        public static bool operator !=(ValueObject<T> left, ValueObject<T> right) => !(left == right);
+        protected abstract IEnumerable<object> GetAtomicValues();
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            var other = (ValueObject)obj;
+            var thisValues = GetAtomicValues().GetEnumerator();
+            var otherValues = other.GetAtomicValues().GetEnumerator();
+            while (thisValues.MoveNext() && otherValues.MoveNext())
+            {
+                if (ReferenceEquals(thisValues.Current, null) ^ ReferenceEquals(otherValues.Current, null))
+                {
+                    return false;
+                }
+                if (thisValues.Current != null && !thisValues.Current.Equals(otherValues.Current))
+                {
+                    return false;
+                }
+            }
+            return !thisValues.MoveNext() && !otherValues.MoveNext();
+        }
 
         public override int GetHashCode()
         {
-            var hash = 21;
-            var attributesToIncludeInEqualityCheck = GetAttributesToIncludeInEqualityCheck();
-            foreach (var obj in attributesToIncludeInEqualityCheck)
-            {
-                hash = hash * 47 + (obj == null ? 0 : obj.GetHashCode());
-            }
-            
-            return hash;
+            return GetAtomicValues()
+             .Select(x => x != null ? x.GetHashCode() : 0)
+             .Aggregate((x, y) => x ^ y);
         }
     }
 }
