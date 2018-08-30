@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2035
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KanbanGame", "src\KanbanGame\KanbanGame.csproj", "{61D397B1-3E1A-4B03-BDED-3167040D1D9D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KanbanGame.DomainModel", "src\KanbanGame.DomainModel\KanbanGame.DomainModel.csproj", "{C7D7B577-E3DC-4E96-B6FE-0E78AD8A3419}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{D8C8547D-BDFC-4B78-BCA4-F36E6E0205A0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KanbanGame.DomainModel.Tests", "test\KanbanGame.DomainModel.Tests\KanbanGame.DomainModel.Tests.csproj", "{280D5850-1C94-4478-BAF1-8F958522D3C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanbanGame.DomainModel.Game", "src\KanbanGame.DomainModel.Game\KanbanGame.DomainModel.Game.csproj", "{5C5244D9-E45B-42D2-B835-9E1B630D038A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanbanGame.DomainModel.Game.Tests", "test\KanbanGame.DomainModel.Game.Tests\KanbanGame.DomainModel.Game.Tests.csproj", "{7DF52F2F-B99A-4A70-BF5D-80C121E6DFAB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{61D397B1-3E1A-4B03-BDED-3167040D1D9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61D397B1-3E1A-4B03-BDED-3167040D1D9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61D397B1-3E1A-4B03-BDED-3167040D1D9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61D397B1-3E1A-4B03-BDED-3167040D1D9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7D7B577-E3DC-4E96-B6FE-0E78AD8A3419}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7D7B577-E3DC-4E96-B6FE-0E78AD8A3419}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7D7B577-E3DC-4E96-B6FE-0E78AD8A3419}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7D7B577-E3DC-4E96-B6FE-0E78AD8A3419}.Release|Any CPU.Build.0 = Release|Any CPU
+		{280D5850-1C94-4478-BAF1-8F958522D3C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{280D5850-1C94-4478-BAF1-8F958522D3C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{280D5850-1C94-4478-BAF1-8F958522D3C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{280D5850-1C94-4478-BAF1-8F958522D3C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C5244D9-E45B-42D2-B835-9E1B630D038A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C5244D9-E45B-42D2-B835-9E1B630D038A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C5244D9-E45B-42D2-B835-9E1B630D038A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C5244D9-E45B-42D2-B835-9E1B630D038A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DF52F2F-B99A-4A70-BF5D-80C121E6DFAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DF52F2F-B99A-4A70-BF5D-80C121E6DFAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DF52F2F-B99A-4A70-BF5D-80C121E6DFAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DF52F2F-B99A-4A70-BF5D-80C121E6DFAB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{280D5850-1C94-4478-BAF1-8F958522D3C3} = {D8C8547D-BDFC-4B78-BCA4-F36E6E0205A0}
+		{7DF52F2F-B99A-4A70-BF5D-80C121E6DFAB} = {D8C8547D-BDFC-4B78-BCA4-F36E6E0205A0}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {96757C6E-579A-4D82-861D-EE60478F2A72}
+	EndGlobalSection
+EndGlobal
