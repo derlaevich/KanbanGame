@@ -21,7 +21,7 @@ namespace KanbanGame.DomainModel.Tests
         }
 
         [Fact]
-        public void ÑalculateSameHashCode_IfInstancesHaveIdenticalId()
+        public void CalculateSameHashCode_IfInstancesHaveIdenticalId()
         {
             var entityFirst = new Entity<int>(1);
             var entitySecond = new Entity<int>(1);
@@ -33,7 +33,7 @@ namespace KanbanGame.DomainModel.Tests
         }
 
         [Fact]
-        public void ÑalculateDifferentHashCode_IfInstancesHaveDifferentId()
+        public void CalculateDifferentHashCode_IfInstancesHaveDifferentId()
         {
             var entityFirst = new Entity<int>(1);
             var entitySecond = new Entity<int>(2);
