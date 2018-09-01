@@ -2,6 +2,7 @@
 using KanbanGame.DomainModel.Game.Interfaces;
 using System;
 using System.Collections.Generic;
+using KanbanGame.Core;
 
 namespace KanbanGame.DomainModel.Game.ValueObjects
 {
@@ -18,11 +19,7 @@ namespace KanbanGame.DomainModel.Game.ValueObjects
 
         public Coin Flip(IRandomService randomService)
         {
-            //TODO: выделить в отдельный класс
-            if (randomService == null)
-            {
-                throw new ArgumentNullException(nameof(randomService));
-            }
+            Guard.ArgumentNotNull(nameof(randomService), randomService);
 
             var randomValue = randomService.GetRanodm(2);
 
