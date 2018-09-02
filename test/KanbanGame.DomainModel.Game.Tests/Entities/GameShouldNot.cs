@@ -16,5 +16,15 @@ namespace KanbanGame.DomainModel.Game.Tests.Entities
 
             Assert.Equal("players", ex.ParamName);
         }
+        
+        [Fact]
+        public void CreateGameWithoutPlayers_WhenPlayersIsEmpty()
+        {
+            var players = new List<Player>();
+            
+            var ex = Assert.Throws<ArgumentException>(() => new FeatureBanGame(players));
+
+            Assert.Equal("players", ex.ParamName);
+        }
     }
 }
