@@ -10,10 +10,8 @@ namespace KanbanGame.DomainModel.Game.Entities
 
         public FeatureBanGame(List<Player> players)
         {
-            Guard.ArgumentNotNull(nameof(players), players);
-            if (!players.GetEnumerator().MoveNext())
-                throw new ArgumentException("Argument was empty", nameof(players));
-            
+            Guard.ArgumentNotNullOrEmpty(nameof(players), players);
+
             _players = players;
         }
     }

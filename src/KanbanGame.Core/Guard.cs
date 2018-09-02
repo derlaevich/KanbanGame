@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 
 namespace KanbanGame.Core
 {
@@ -8,6 +9,13 @@ namespace KanbanGame.Core
         {
             if (argValue == null)
                 throw new ArgumentNullException(argName);
+        }
+        
+        public static void ArgumentNotNullOrEmpty(string argName, IEnumerable argValue)
+        {
+            ArgumentNotNull(argName, argValue);
+            if (!argValue.GetEnumerator().MoveNext())
+                throw new ArgumentException("Argument was empty", nameof(argValue));
         }
     }
 }
