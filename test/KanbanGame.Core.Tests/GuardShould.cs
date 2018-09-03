@@ -36,5 +36,19 @@ namespace KanbanGame.Core.Tests
 
             Assert.Equal("obj", ex.ParamName);
         }
+        
+        [Fact]
+        public void ThrowException_IfParamNotValid()
+        {
+            var parameterThatMustBeGreaterThanZero = 0;
+
+            var isValid = parameterThatMustBeGreaterThanZero > 0;
+            var ex = Assert
+                .Throws<ArgumentException>(() => 
+                    Guard.ArgumentValid(nameof(parameterThatMustBeGreaterThanZero), "message",isValid));
+
+            Assert.Equal("parameterThatMustBeGreaterThanZero", ex.ParamName);
+            Assert.Contains("message", ex.Message);
+        }
     }
 }
