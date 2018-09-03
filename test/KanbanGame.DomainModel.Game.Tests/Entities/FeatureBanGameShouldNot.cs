@@ -5,7 +5,7 @@ using Xunit;
 
 namespace KanbanGame.DomainModel.Game.Tests.Entities
 {
-    public class GameShouldNot
+    public class FeatureBanGameShouldNot
     {
         [Fact]
         public void CreateGameWithoutPlayers_WhenPlayersIsNull()
@@ -18,11 +18,11 @@ namespace KanbanGame.DomainModel.Game.Tests.Entities
         }
         
         [Fact]
-        public void CreateGameWithoutPlayers_WhenPlayersIsEmpty()
+        public void CreateGameWithoutPlayers_WhenPassPlayerCollectionIsEmpty()
         {
-            var players = new List<Player>();
+            var playersCollection = new List<Player>();
             
-            var ex = Assert.Throws<ArgumentException>(() => new FeatureBanGame(players));
+            var ex = Assert.Throws<ArgumentException>(() => new FeatureBanGame(playersCollection));
 
             Assert.Equal("players", ex.ParamName);
         }

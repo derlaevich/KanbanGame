@@ -15,7 +15,9 @@ namespace KanbanGame.Core
         {
             ArgumentNotNull(argName, argValue);
             if (!argValue.GetEnumerator().MoveNext())
-                throw new ArgumentException("Argument was empty", nameof(argValue));
+            {
+                throw new ArgumentException("Argument was empty", argName);
+            }
         }
     }
 }
