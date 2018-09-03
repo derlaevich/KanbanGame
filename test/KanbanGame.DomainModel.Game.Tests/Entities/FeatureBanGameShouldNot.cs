@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using KanbanGame.DomainModel.Game.Entities;
+using KanbanGame.DomainModel.Game.Tests.Dsl;
 using Xunit;
 
 namespace KanbanGame.DomainModel.Game.Tests.Entities
@@ -10,9 +11,11 @@ namespace KanbanGame.DomainModel.Game.Tests.Entities
         [Fact]
         public void CreateGameWithoutPlayers_WhenPlayersIsNull()
         {
-            List<Player> players = null;
+            var gameBuilder = Create
+                .FeatureBanGame
+                .WithPlayers(null);
             
-            var ex = Assert.Throws<ArgumentNullException>(() => new FeatureBanGame(players));
+            var ex = Assert.Throws<ArgumentNullException>(() => gameBuilder.Please());
 
             Assert.Equal("players", ex.ParamName);
         }
@@ -20,11 +23,26 @@ namespace KanbanGame.DomainModel.Game.Tests.Entities
         [Fact]
         public void CreateGameWithoutPlayers_WhenPassPlayerCollectionIsEmpty()
         {
-            var playersCollection = new List<Player>();
+            var gameBuilder = Create
+                .FeatureBanGame
+                .WithPlayers(new List<Player>());
             
-            var ex = Assert.Throws<ArgumentException>(() => new FeatureBanGame(playersCollection));
+            var ex = Assert.Throws<ArgumentException>(() => gameBuilder.Please());
 
             Assert.Equal("players", ex.ParamName);
+        }
+        
+        [Fact]
+        public void CreateGame_IfNumberOfRoundsLessThanOne()
+        {
+            var gameBuilder = Create
+                .FeatureBanGame
+                .WithNumberOfRounds(0);
+            
+            var ex = Assert.Throws<ArgumentException>(() => gameBuilder.Please());
+
+            Assert.Equal("numberOfRounds", ex.ParamName);
+            Assert.Contains("Argument must be greater than 0", ex.Message);
         }
     }
 }
