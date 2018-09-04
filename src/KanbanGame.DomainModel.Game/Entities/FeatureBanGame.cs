@@ -1,15 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using KanbanGame.Core;
+using KanbanGame.DomainModel.Game.Emuns;
 
 namespace KanbanGame.DomainModel.Game.Entities
 {
     public class FeatureBanGame
     {
-        private List<Player> _players;
-        private int _numberOfRounds;
+        private readonly List<Player> _players;
+        private readonly int _numberOfRounds;
         private IEnumerator _roundsEnumerator;
+        private GameStatus _status;
 
         public FeatureBanGame(List<Player> players, int numberOfRounds)
         {
@@ -20,22 +23,24 @@ namespace KanbanGame.DomainModel.Game.Entities
 
             _players = players;
             _numberOfRounds = numberOfRounds;
+            _status = GameStatus.Stopped;
         }
 
         public void StartGame()
         {
-            var _roundsEnumerator = Enumerable.Range(0, _numberOfRounds).GetEnumerator();
+            _roundsEnumerator = Enumerable.Range(0, _numberOfRounds).GetEnumerator();
+            
+            _status = GameStatus.Started;
         }
 
-        public bool NextRound()
+        public bool MoveNextRounds()
         {
-            var hasNextRound = _roundsEnumerator.MoveNext();
-            if (hasNextRound)
+            if (_status == GameStatus.Stopped)
             {
-                return hasNextRound;
+                throw new InvalidOperationException("The game isn't started");
             }
 
-            return hasNextRound;
+            return _roundsEnumerator.MoveNext();
         }
     }
 }
