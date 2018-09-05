@@ -15,6 +15,13 @@ namespace KanbanGame.DomainModel.Game.Tests.Dsl
             return this;
         }
         
+        public ColumnBuilder WithTicket(Ticket ticket)
+        {
+            _tickets = new List<Ticket>{ticket};
+
+            return this;
+        }
+        
         public ColumnBuilder WithoutTickets()
         {
             _tickets = null;

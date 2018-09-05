@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Mime;
 using KanbanGame.Core;
 
 namespace KanbanGame.DomainModel.Game.Entities
@@ -29,6 +30,11 @@ namespace KanbanGame.DomainModel.Game.Entities
         public void Remove(Ticket ticket)
         {
             _tickets.Remove(ticket);
+        }
+
+        public bool Contains(Ticket ticket)
+        {
+            return _tickets.Contains(ticket);
         }
     }
 }

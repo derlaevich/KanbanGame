@@ -45,7 +45,21 @@ namespace KanbanGame.DomainModel.Game.Tests.Entities
         }
         
         [Fact]
-        public void AddTicket_WhenCallAddRemove()
+        public void RemoveTicket_WhenCallRemove()
+        {
+            var ticket = new Ticket(Guid.NewGuid());
+            var column = Create
+                .Column
+                .WithTicket(ticket)
+                .Please();
+            
+            column.Remove(ticket);
+            
+            Assert.Equal(0, column.Tickets.Count);
+        }
+        
+        [Fact]
+        public void ContainsTicket_IfTicketWasAdded()
         {
             var column = Create
                 .Column
@@ -54,9 +68,24 @@ namespace KanbanGame.DomainModel.Game.Tests.Entities
             var ticket = new Ticket(Guid.NewGuid());
             column.Add(ticket);
             
-            column.Remove(ticket);
+            var result = column.Contains(ticket);
             
-            Assert.Equal(0, column.Tickets.Count);
+            Assert.True(result);
+        }
+        
+        [Fact]
+        public void MoveTicketToNextColumn()
+        {
+            var column = Create
+                .Column
+                .WithoutTickets()
+                .Please();
+            var ticket = new Ticket(Guid.NewGuid());
+            column.Add(ticket);
+            
+            var result = column.Contains(ticket);
+            
+            Assert.True(result);
         }
     }
 }

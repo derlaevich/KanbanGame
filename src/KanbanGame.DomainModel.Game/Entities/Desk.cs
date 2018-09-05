@@ -6,23 +6,53 @@ namespace KanbanGame.DomainModel.Game.Entities
 {
     public class Desk : Entity<Guid>
     {
-        private readonly List<Ticket> _backlog;
-        public IReadOnlyCollection<Ticket> Backlog => _backlog.AsReadOnly();
-        
-        private readonly List<Ticket> _toDo;
-        public IReadOnlyCollection<Ticket> ToDo => _toDo.AsReadOnly();
-        
-        private readonly List<Ticket> _test;
-        public IReadOnlyCollection<Ticket> Test => _test.AsReadOnly();
-        
-        private readonly List<Ticket> _done;
-        public IReadOnlyCollection<Ticket> Done => _done.AsReadOnly();
+        public Column Backlog { get; private set; }
+        public Column ToDo { get; private set; }
+        public Column Test { get; private set; }
+        public Column Done { get; private set; }
 
-        public Desk(List<Ticket> tickets) : base(Guid.NewGuid())
+        public Desk(List<Ticket> backlogTickets) : base(Guid.NewGuid())
         {
-            Guard.ArgumentNotNullOrEmpty(nameof(tickets), tickets);
+            Guard.ArgumentNotNullOrEmpty(nameof(backlogTickets), backlogTickets);
             
-            _backlog = tickets;
+            Backlog = new Column(backlogTickets);
+            ToDo = new Column();
+            Test = new Column();
+            Done = new Column();
+        }
+
+        public void MoveToNext(Ticket ticket)
+        {
+            if (Backlog.Contains(ticket))
+            {
+                Move(Backlog, ToDo, ticket);
+                return;
+            }
+            
+            if (ToDo.Contains(ticket))
+            {
+                Move(ToDo, Test, ticket);
+                return;
+            }
+            
+            if (Test.Contains(ticket))
+            {
+                Move(Test, Done, ticket);
+                return;
+            }
+            
+            if (Done.Contains(ticket))
+            {
+                throw new InvalidOperationException("The ticket is in the done column");
+            }
+
+            throw new InvalidOperationException("Ticket not found");
+        }
+
+        private void Move(Column source, Column destination, Ticket ticket)
+        {
+            source.Remove(ticket);
+            destination.Add(ticket);
         }
     }
 }

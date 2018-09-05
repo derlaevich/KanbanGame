@@ -5,12 +5,12 @@ namespace KanbanGame.DomainModel.Game.Tests.Dsl
     {
         public static RandomServiceBuilder RandomService => new RandomServiceBuilder();
 
-        public static FeatureBanGameBuilder FeatureBanGame = new FeatureBanGameBuilder();
+        public static FeatureBanGameBuilder FeatureBanGame => new FeatureBanGameBuilder();
         
-        public static TicketBuilder Ticket = new TicketBuilder();
+        public static TicketBuilder Ticket => new TicketBuilder();
         
-        public static DeskBuilder Desk = new DeskBuilder();
+        public static DeskBuilder Desk => new DeskBuilder();
         
-        public static ColumnBuilder Column = new ColumnBuilder();
+        public static ColumnBuilder Column => new ColumnBuilder();
     }
 }
