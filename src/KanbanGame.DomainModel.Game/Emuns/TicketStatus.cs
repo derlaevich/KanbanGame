@@ -1,6 +1,6 @@
 namespace KanbanGame.DomainModel.Game.Emuns
 {
-    public enum TiketStatus
+    public enum TicketStatus
     {
         Active,
         Block,

@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using KanbanGame.DomainModel.Game.Tests.Dsl;
 using Xunit;
 
@@ -16,7 +15,6 @@ namespace KanbanGame.DomainModel.Game.Tests.Entities
                 .Please();
 
             game.StartGame();
-            //var playedRounds = game.MoveNextRounds().Count();
             var playedRounds = 0;
             while (game.MoveNextRounds())
             {

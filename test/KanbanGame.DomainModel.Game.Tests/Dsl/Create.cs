@@ -7,6 +7,8 @@ namespace KanbanGame.DomainModel.Game.Tests.Dsl
 
         public static FeatureBanGameBuilder FeatureBanGame = new FeatureBanGameBuilder();
         
-        public  static TicketBuilder Tiket = new TicketBuilder();
+        public static TicketBuilder Ticket = new TicketBuilder();
+        
+        public static DeskBuilder Desk = new DeskBuilder(); 
     }
 }
