@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using KanbanGame.Core;
 
 namespace KanbanGame.DomainModel.Game.Entities

@@ -9,6 +9,8 @@ namespace KanbanGame.DomainModel.Game.Tests.Dsl
         
         public static TicketBuilder Ticket = new TicketBuilder();
         
-        public static DeskBuilder Desk = new DeskBuilder(); 
+        public static DeskBuilder Desk = new DeskBuilder();
+        
+        public static ColumnBuilder Column = new ColumnBuilder();
     }
 }
