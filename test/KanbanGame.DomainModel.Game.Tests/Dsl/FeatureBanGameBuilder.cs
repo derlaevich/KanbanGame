@@ -24,7 +24,7 @@ namespace KanbanGame.DomainModel.Game.Tests.Dsl
 
         public FeatureBanGame Please()
         {
-            return new FeatureBanGame(_players, _numberOfRounds);
+            return new FeatureBanGame(_players, null, _numberOfRounds);
         }
     }
 }

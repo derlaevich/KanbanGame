@@ -2,25 +2,23 @@
 using KanbanGame.DomainModel.Game.Interfaces;
 using System;
 using System.Collections.Generic;
-using KanbanGame.Core;
+using KanbanGame.DomainModel.Game.Services;
 
 namespace KanbanGame.DomainModel.Game.ValueObjects
 {
     public class Coin : ValueObject
     {
-        public SideOfCoin Side { get; private set; }
+        public SideOfCoin Side { get; }
 
         public Coin(SideOfCoin side)
         {
             Side = side;
         }
 
-        public Coin() : this(SideOfCoin.Tails) { }
-
-        public Coin Flip(IRandomService randomService)
+        public static Coin Flip(IRandomService randomService = null)
         {
-            Guard.ArgumentNotNull(nameof(randomService), randomService);
-
+            randomService = randomService ?? new RandomService();
+                
             var randomValue = randomService.GetRanodm(2);
 
             switch (randomValue)

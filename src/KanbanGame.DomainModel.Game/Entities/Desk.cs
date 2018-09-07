@@ -6,23 +6,65 @@ namespace KanbanGame.DomainModel.Game.Entities
 {
     public class Desk : Entity<Guid>
     {
-        public Column Backlog { get; private set; }
-        public Column ToDo { get; private set; }
-        public Column Test { get; private set; }
-        public Column Done { get; private set; }
+        public Column Backlog { get; }
+        public Column ToDo { get; }
+        public Column Test { get; }
+        public Column Done { get; }
+        private int? _wipLimit { get; }
 
-        public Desk(List<Ticket> backlogTickets) : base(Guid.NewGuid())
+        public Desk(List<Ticket> backlogTickets, int? wipLimit = null) : base(Guid.NewGuid())
         {
             Guard.ArgumentNotNullOrEmpty(nameof(backlogTickets), backlogTickets);
-            
+
+            _wipLimit = wipLimit;
             Backlog = new Column(backlogTickets);
             ToDo = new Column();
             Test = new Column();
             Done = new Column();
         }
 
-        public void MoveToNext(Ticket ticket)
+        public bool TryGetOpenAndActiveTicket(Guid ownerId, out Ticket ticket)
         {
+            if (ToDo.TryGetActiveTicket(ownerId, out ticket))
+            {
+                return true;
+            }
+            
+            if (Test.TryGetActiveTicket(ownerId, out ticket))
+            {
+                return true;
+            }
+
+            ticket = null;
+            return false;
+        }
+        
+        public bool TryGetOpenAndBlockTicket(Guid ownerId, out Ticket ticket)
+        {
+            if (ToDo.TryGetBlockTicket(ownerId, out ticket))
+            {
+                return true;
+            }
+            
+            if (Test.TryGetBlockTicket(ownerId, out ticket))
+            {
+                return true;
+            }
+
+            ticket = null;
+            return false;
+        }
+
+        public bool TryGetTicketFromBacklog(Guid ownerId, out Ticket ticket)
+        {
+            ticket = null;
+            return Backlog.TryGetActiveTicket(ownerId, out ticket);
+        }
+
+        public void MoveToNextColumn(Ticket ticket)
+        {
+            Guard.ArgumentNotNull(nameof(ticket), ticket);
+            
             if (Backlog.Contains(ticket))
             {
                 Move(Backlog, ToDo, ticket);
@@ -51,6 +93,11 @@ namespace KanbanGame.DomainModel.Game.Entities
 
         private void Move(Column source, Column destination, Ticket ticket)
         {
+            if (destination.Count() >= _wipLimit)
+            {
+                throw new InvalidOperationException($"Maximum number of tickets in column: {_wipLimit}");     
+            }
+
             source.Remove(ticket);
             destination.Add(ticket);
         }

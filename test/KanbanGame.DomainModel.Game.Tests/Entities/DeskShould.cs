@@ -39,7 +39,7 @@ namespace KanbanGame.DomainModel.Game.Tests.Entities
                 .WithTickets(new List<Ticket> {ticket})
                 .Please();
             
-            desk.MoveToNext(ticket);
+            desk.MoveToNextColumn(ticket);
             var contain = desk.ToDo.Contains(ticket);
             
             Assert.True(contain);
@@ -53,22 +53,29 @@ namespace KanbanGame.DomainModel.Game.Tests.Entities
                 .Desk
                 .Please();
             
-            var ex = Assert.Throws<InvalidOperationException>(() => desk.MoveToNext(ticket));
+            var ex = Assert.Throws<InvalidOperationException>(() => desk.MoveToNextColumn(ticket));
 
             Assert.Equal("Ticket not found", ex.Message);
         }
         
+        
         [Fact]
-        public void ThrowException_IfTicketIsInDoneColumn()
+        public void ReturnOpenTicket_IfContains()
         {
-            var ticket = new Ticket(Guid.NewGuid());
+            var ownerId = Guid.NewGuid();
+            var ticket = Create
+                .Ticket
+                .WithOwnerId(ownerId)
+                .Please();
             var desk = Create
                 .Desk
+                .WithTickets(new List<Ticket>() {ticket})
                 .Please();
-            
-            var ex = Assert.Throws<InvalidOperationException>(() => desk.MoveToNext(ticket));
 
-            Assert.Equal("The ticket is in the done column", ex.Message);
+            var result = desk.TryGetOpenAndActiveTicket(ownerId, out var foundTicket);
+            
+            Assert.True(result);
+            Assert.Equal(ticket, foundTicket);
         }
     }
 }
