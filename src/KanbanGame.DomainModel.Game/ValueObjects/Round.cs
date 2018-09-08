@@ -88,7 +88,7 @@ namespace KanbanGame.DomainModel.Game.ValueObjects
             
             if (_desk.TryGetTicketFromBacklog(player.Id, out ticket))
             {
-                ticket.Unblock();
+                _desk.MoveToNextColumn(ticket);
             }
         }
 

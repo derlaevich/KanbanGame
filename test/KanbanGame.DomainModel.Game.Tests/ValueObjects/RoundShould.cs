@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Globalization;
 using KanbanGame.DomainModel.Game.Emuns;
 using KanbanGame.DomainModel.Game.Entities;
 using KanbanGame.DomainModel.Game.Tests.Dsl;
@@ -102,6 +101,51 @@ namespace KanbanGame.DomainModel.Game.Tests.ValueObjects
                 .Please();
 
             round.DoTailsActions(player);
+            
+            Assert.True(desk.ToDo.Contains(ticket));
+        }
+        
+        [Fact]
+        public void BlockTicket_IfCoinSideIsHeads()
+        {
+            var player = new Player();
+            var ticket = Create
+                .Ticket
+                .WithOwnerId(player.Id)
+                .Please();
+            var desk = Create
+                .Desk
+                .WithTickets(new List<Ticket>{ ticket })
+                .Please();
+            var round = Create
+                .Round
+                .WithDesk(desk)
+                .Please();
+            desk.MoveToNextColumn(ticket);
+
+            round.DoHeadsActions(player);
+            
+            Assert.Equal(TicketStatus.Block, ticket.Status);
+        }
+        
+        [Fact]
+        public void OpenTicket_IfCoinSideIsHeads()
+        {
+            var player = new Player();
+            var ticket = Create
+                .Ticket
+                .WithOwnerId(player.Id)
+                .Please();
+            var desk = Create
+                .Desk
+                .WithTickets(new List<Ticket>{ ticket })
+                .Please();
+            var round = Create
+                .Round
+                .WithDesk(desk)
+                .Please();
+
+            round.DoHeadsActions(player);
             
             Assert.True(desk.ToDo.Contains(ticket));
         }
