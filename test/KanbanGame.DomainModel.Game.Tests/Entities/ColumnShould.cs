@@ -106,5 +106,25 @@ namespace KanbanGame.DomainModel.Game.Tests.Entities
             Assert.True(result);
             Assert.Equal(ticket, foundTicket);
         }
+
+        [Fact]
+        public void ReturnBlockTicket_IfContains()
+        {
+            var ownerId = Guid.NewGuid();
+            var ticket = Create
+                .Ticket
+                .WithOwnerId(ownerId)
+                .Please();
+            var column = Create
+                .Column
+                .WithTicket(ticket)
+                .Please();
+            ticket.Block();
+
+            var result = column.TryGetBlockTicket(ownerId, out var foundTicket);
+            
+            Assert.True(result);
+            Assert.Equal(ticket, foundTicket);
+        }
     }
 }
