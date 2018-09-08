@@ -83,5 +83,27 @@ namespace KanbanGame.DomainModel.Game.Tests.ValueObjects
             
             Assert.Equal(TicketStatus.Active, ticket.Status);
         }
+        
+        [Fact]
+        public void OpenTicket_IfCoinSideIsTails()
+        {
+            var player = new Player();
+            var ticket = Create
+                .Ticket
+                .WithOwnerId(player.Id)
+                .Please();
+            var desk = Create
+                .Desk
+                .WithTickets(new List<Ticket>{ ticket })
+                .Please();
+            var round = Create
+                .Round
+                .WithDesk(desk)
+                .Please();
+
+            round.DoTailsActions(player);
+            
+            Assert.True(desk.ToDo.Contains(ticket));
+        }
     }
 }
