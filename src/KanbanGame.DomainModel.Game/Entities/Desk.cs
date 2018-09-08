@@ -93,7 +93,9 @@ namespace KanbanGame.DomainModel.Game.Entities
 
         private void Move(Column source, Column destination, Ticket ticket)
         {
-            if (destination.Count() >= _wipLimit)
+            var destinationColumnIsNotDone = destination != Done;
+            var _wipLimitIsActive = _wipLimit.HasValue;
+            if (destinationColumnIsNotDone && _wipLimitIsActive && destination.Count() >= _wipLimit)
             {
                 throw new InvalidOperationException($"Maximum number of tickets in column: {_wipLimit}");     
             }
