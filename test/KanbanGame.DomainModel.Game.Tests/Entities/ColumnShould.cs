@@ -89,7 +89,7 @@ namespace KanbanGame.DomainModel.Game.Tests.Entities
         }
 
         [Fact]
-        public void ReturnTicket_IfContains()
+        public void ReturnActiveTicket_IfContains()
         {
             var ownerId = Guid.NewGuid();
             var ticket = Create
