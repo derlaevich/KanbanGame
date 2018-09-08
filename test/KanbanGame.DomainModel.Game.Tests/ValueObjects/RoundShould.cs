@@ -21,5 +21,17 @@ namespace KanbanGame.DomainModel.Game.Tests.ValueObjects
 
             roundMock.Verify(round => round.DoTailsActions(It.IsAny<Player>()), Times.Once());
         }
+        
+        public void DoHeadsActions_IfCoinSideIsHeads()
+        {
+            var roundMock = Create
+                .Round
+                .WithCoin(new Coin(SideOfCoin.Heads))
+                .PleaseMock();
+            
+            roundMock.Object.Play();
+
+            roundMock.Verify(round => round.DoTailsActions(It.IsAny<Player>()), Times.Once());
+        }
     }
 }
