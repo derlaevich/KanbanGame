@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using KanbanGame.DomainModel.Game.Entities;
 
@@ -7,6 +8,7 @@ namespace KanbanGame.DomainModel.Game.Tests.Dsl
     {
         private List<Player> _players = new List<Player>() {new Player()};
         private int _numberOfRounds = 5;
+        private Desk _desk = new Desk(new List<Ticket>() {new Ticket(Guid.NewGuid())});
 
         public FeatureBanGameBuilder WithPlayers(List<Player> players)
         {
@@ -24,7 +26,7 @@ namespace KanbanGame.DomainModel.Game.Tests.Dsl
 
         public FeatureBanGame Please()
         {
-            return new FeatureBanGame(_players, null, _numberOfRounds);
+            return new FeatureBanGame(_players, _desk, _numberOfRounds);
         }
     }
 }

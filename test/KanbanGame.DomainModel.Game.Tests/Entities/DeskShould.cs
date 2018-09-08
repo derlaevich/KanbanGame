@@ -71,6 +71,7 @@ namespace KanbanGame.DomainModel.Game.Tests.Entities
                 .Desk
                 .WithTickets(new List<Ticket>() {ticket})
                 .Please();
+            desk.MoveToNextColumn(ticket);
 
             var result = desk.TryGetOpenAndActiveTicket(ownerId, out var foundTicket);
             
