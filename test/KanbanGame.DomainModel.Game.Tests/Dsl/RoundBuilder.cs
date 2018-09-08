@@ -8,14 +8,9 @@ namespace KanbanGame.DomainModel.Game.Tests.Dsl
 {
     public class RoundBuilder
     {
-        private List<Player> _player = new List<Player>() { new Player() };
+        private List<Player> _players = new List<Player> { new Player() };
         private Desk _desk = new Desk(new List<Ticket> { new Ticket(Guid.NewGuid()) });
         private Coin _coin = null;
-
-        public Round Please()
-        {
-            return new Round(_player, _desk);
-        }
 
         public RoundBuilder WithCoin(Coin coin)
         {
@@ -23,10 +18,22 @@ namespace KanbanGame.DomainModel.Game.Tests.Dsl
 
             return this;
         }
+        
+        public RoundBuilder WithDesk(Desk desk)
+        {
+            _desk = desk;
+
+            return this;
+        }
+        
+        public Round Please()
+        {
+            return new Round(_players, _desk);
+        }
 
         public Mock<Round> PleaseMock()
         {
-            var roundMock = new Mock<Round>(_player, _desk);
+            var roundMock = new Mock<Round>(_players, _desk);
 
             if (_coin != null)
             {
