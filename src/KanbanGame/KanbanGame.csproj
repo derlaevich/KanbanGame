@@ -7,6 +7,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\KanbanGame.DomainModel.Game\KanbanGame.DomainModel.Game.csproj" />
+    <ProjectReference Include="..\KanbanGame.DomainModel.Reports\KanbanGame.DomainModel.Reports.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ServiceStack.Text.Core" Version="5.2.0" />
   </ItemGroup>
 
 </Project>

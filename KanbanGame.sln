@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanbanGame.Core", "src\Kanb
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanbanGame.Core.Tests", "test\KanbanGame.Core.Tests\KanbanGame.Core.Tests.csproj", "{9FEEE8E2-A28D-4EAE-96C5-345B16BDFAAB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanbanGame.DomainModel.Reports", "src\KanbanGame.DomainModel.Reports\KanbanGame.DomainModel.Reports.csproj", "{2C11A5B1-D38E-4906-BD7E-0058D1107699}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{9FEEE8E2-A28D-4EAE-96C5-345B16BDFAAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FEEE8E2-A28D-4EAE-96C5-345B16BDFAAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FEEE8E2-A28D-4EAE-96C5-345B16BDFAAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C11A5B1-D38E-4906-BD7E-0058D1107699}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C11A5B1-D38E-4906-BD7E-0058D1107699}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C11A5B1-D38E-4906-BD7E-0058D1107699}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C11A5B1-D38E-4906-BD7E-0058D1107699}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

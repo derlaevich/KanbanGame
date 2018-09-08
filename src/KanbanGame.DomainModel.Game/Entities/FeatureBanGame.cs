@@ -8,7 +8,7 @@ using KanbanGame.DomainModel.Game.ValueObjects;
 
 namespace KanbanGame.DomainModel.Game.Entities
 {
-    public class FeatureBanGame
+    public class FeatureBanGame : Entity<Guid>
     {
         private readonly List<Player> _players;
         private readonly int _numberOfRounds;
@@ -17,7 +17,7 @@ namespace KanbanGame.DomainModel.Game.Entities
         private GameStatus _status;
         private Round _currentRound;
 
-        public FeatureBanGame(List<Player> players, Desk desk, int numberOfRounds)
+        public FeatureBanGame(List<Player> players, Desk desk, int numberOfRounds) : base(Guid.NewGuid())
         {
             Guard.ArgumentNotNullOrEmpty(nameof(players), players);
             Guard.ArgumentNotNull(nameof(desk), desk);
