@@ -1,5 +1,4 @@
 ﻿using KanbanGame.DomainModel.Game.Emuns;
-using KanbanGame.DomainModel.Game.Interfaces;
 using KanbanGame.DomainModel.Game.Tests.Dsl;
 using KanbanGame.DomainModel.Game.ValueObjects;
 using System;
@@ -20,6 +19,19 @@ namespace KanbanGame.DomainModel.Game.Tests.ValueObjects
             var coin = Coin.Flip(randomService);
 
             Assert.Equal(SideOfCoin.Tails, coin.Side);
+        }
+        
+        [Fact]
+        public void CreateNewCoinWithHeadsSide_IfRandomServiceReturnsOne()
+        {
+            var randomService = Create
+                .RandomService
+                .WithResult(0)
+                .Please();
+
+            var coin = Coin.Flip(randomService);
+
+            Assert.Equal(SideOfCoin.Heads, coin.Side);
         }
 
         [Fact]

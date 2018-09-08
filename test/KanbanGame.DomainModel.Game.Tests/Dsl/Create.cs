@@ -12,5 +12,7 @@ namespace KanbanGame.DomainModel.Game.Tests.Dsl
         public static DeskBuilder Desk => new DeskBuilder();
         
         public static ColumnBuilder Column => new ColumnBuilder();
+        
+        public static RoundBuilder Round => new RoundBuilder();
     }
 }

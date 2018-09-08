@@ -1,8 +1,12 @@
 using System;
 using System.Collections.Generic;
+using KanbanGame.Core;
 using KanbanGame.DomainModel.Game.Emuns;
 using KanbanGame.DomainModel.Game.Entities;
+using System.Runtime.CompilerServices;
 
+[assembly:InternalsVisibleTo("KanbanGame.DomainModel.Game.Tests")]
+[assembly:InternalsVisibleTo("DynamicProxyGenAssembly2")]
 namespace KanbanGame.DomainModel.Game.ValueObjects
 {
     public class Round : ValueObject
@@ -12,6 +16,9 @@ namespace KanbanGame.DomainModel.Game.ValueObjects
        
         public Round(List<Player> players, Desk desk)
         {
+            Guard.ArgumentNotNullOrEmpty(nameof(desk), players);
+            Guard.ArgumentNotNull(nameof(desk), desk);
+            
             _players = players;
             _desk = desk;
         }
@@ -20,7 +27,7 @@ namespace KanbanGame.DomainModel.Game.ValueObjects
         {
             foreach (var player in _players)
             {
-                var coin = Coin.Flip();
+                var coin = FlipCoin();
 
                 switch (coin.Side)
                 {
@@ -36,7 +43,12 @@ namespace KanbanGame.DomainModel.Game.ValueObjects
             }
         }
 
-        private void DoTailsActions(Player player)
+        internal virtual Coin FlipCoin()
+        {
+            return Coin.Flip();
+        }
+
+        internal virtual void DoTailsActions(Player player)
         {
             if (_desk.TryGetOpenAndActiveTicket(player.Id, out var ticket))
             {
@@ -66,7 +78,7 @@ namespace KanbanGame.DomainModel.Game.ValueObjects
             }
         }
 
-        private void DoHeadsActions(Player player)
+        internal virtual void DoHeadsActions(Player player)
         {
             if (_desk.TryGetOpenAndActiveTicket(player.Id, out var ticket))
             {
